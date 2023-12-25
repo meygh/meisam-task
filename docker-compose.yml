@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  mariadb:
+    container_name: mariadb-mg
+    restart: on-failure
+    build: ./docker/mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: "Pass@123"
+      MYSQL_USER: "meisam.ghanbari"
+      MYSQL_PASSWORD: "Passw0rd"
+    volumes:
+      - ./volumes/mariadb:/var/lib/mysql:rw
+    ports:
+      - 13306:13307
+    networks:
+      - MeisamGhanbari
+
+  php:
+    container_name: php-mg
+    restart: on-failure
+    build:
+      context: ./docker/php
+      args:
+        TIMEZONE: ${TIMEZONE}
+    expose:
+      - 9000:9000
+    depends_on:
+      - mariadb
+    environment:
+      - APP_ENV=${APP_ENV}
+      - PHP_DATE_TIMEZONE=${TIMEZONE}
+    volumes:
+      - ./api/:/var/www/api:rw
+      - ./volumes/logs:/var/log:rw
+    networks:
+      - MeisamGhanbari
+
+  nginx:
+    container_name: nginx-mg
+    restart: on-failure
+    build:
+      context: ./docker/nginx
+    volumes:
+      - ./api/:/var/www/api:rw
+      - ./volumes/logs:/var/log/nginx:rw
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/sites/:/etc/nginx/sites-available
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d
+    depends_on:
+      - php
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - MeisamGhanbari
+
+  phpmyadmin:
+    container_name: phpmyadmin-mg
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOSTS: mariadb
+      PMA_VERBOSES: docker_localhost
+      PMA_PORTS: 3306,3306
+      PMA_USER: root
+      PMA_PASSWORD: Pass@123
+      PMA_ARBITRARY: 1
+      MAX_EXECUTION_TIME: 3600
+      UPLOAD_LIMIT: 500M
+    ports:
+      - 8081:80
+    depends_on:
+      - mariadb
+    networks:
+      - MeisamGhanbari
+
+networks:
+  MeisamGhanbari:
+    driver: bridge

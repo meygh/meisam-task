@@ -16,17 +16,22 @@ List of functionalities and methods:
 - Add flights as 2d array related to users.
 - Retrieve list of the first departure and the last destination that user had ever.
 
-Notice:
-No endpoint has developed at this time to manage users, however, users will be stored in the database if is a new one depends on Passport ID in order to further operations.
+### Notice:
+- This api platform supports versioning
+  - v1
+  - latest
+- No endpoint has developed at this time to manage users, however, users will be stored in the database if is a new one depends on Passport ID in order to further operations.
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 
 ## Technologies and Tools
 
-- **[PHP 8.1](https://php.net/)**
-- **[Laravel](https://laravel.com/)**
+- **[Nginx](https://nginx.com)**
+- **[PHP 8.1](https://php.net)**
+- **[Laravel](https://laravel.com)**
 - **[MySQL (MariaDb)](https://mariadb.org)**
+- **[phpMyAdmin](https://phpmyadmin.net)**
 - **[Docker & Docker Compose](https://docker.com)**
 
 ## Instruction to launch the project
@@ -44,6 +49,24 @@ docker-compose up -d
 ```shell
 docker-compose down
 ```
+
+**Prepare the project to run**
+```shell
+docker-compose exec php composer require
+```
+
+# HTTP Routes
+
+- **[API Root](http://localhost/api)**
+- **[phpMyAdmin](http://127.0.0.1:8081)**
+
+## API endpoints
+
+- **[Add Flights](http://localhost/api/v1/add-flights)**
+  - http://localhost/api/v1/add-flights
+
+- **[Get Flights History](http://localhost/api/v1/add-flights)**
+  - http://localhost/api/v1/add-flights
 
 ## License
 
