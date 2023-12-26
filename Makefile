@@ -16,4 +16,4 @@ db:
 
 Prepare the project to run:
     docker-compose exec php composer require
-    docker-compose exec php ./artisan migrate
+    docker-compose exec php ./artisan migrate --seed

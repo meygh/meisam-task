@@ -50,15 +50,16 @@ docker-compose up -d
 docker-compose down
 ```
 
-**Prepare the project to run**
-First Step
+**Prepare the project to run**\
+- First Step
 ```shell
 docker-compose exec php composer require
 ```
-Second Step
+- Second Step
 ```shell
-docker-compose exec php ./artisan migrate 
+docker-compose exec php ./artisan migrate --seed
 ```
+*After run the migration, 5 random users with several random flights will be added.*
 
 # HTTP Routes
 
