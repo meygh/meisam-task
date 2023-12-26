@@ -38,11 +38,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             $api_latest_version = config('app.api_latest_version');
 
-            // Default API routes without supporting api versions
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
-
             // Latest API Version
             Route::prefix('api/latest')
                 ->middleware(['api', "api.version:v{$api_latest_version}"])
@@ -54,6 +49,14 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware(['api', 'api.version:v1'])
                 ->namespace("{$this->apiNamespace}\V1")
                 ->group(base_path('routes/api_v1.php'));
+
+            /*
+             * Default API routes without api version prefix
+             *  which it will work base on latest api version.
+             */
+            Route::prefix('api')
+                ->middleware(['api', "api.version:v{$api_latest_version}"])
+                ->group(base_path("routes/api_v{$api_latest_version}.php"));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
