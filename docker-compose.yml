@@ -3,12 +3,12 @@ version: '3.8'
 services:
   mariadb:
     container_name: mariadb-mg
-    restart: on-failure
+    restart: always
     build: ./docker/mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: "Pass@123"
-      MYSQL_USER: "meisam.ghanbari"
-      MYSQL_PASSWORD: "Passw0rd"
+      MYSQL_ROOT_PASSWORD: Pass@123
+      MYSQL_USER: meisam.ghanbari
+      MYSQL_PASSWORD: Passw0rd
     volumes:
       - ./volumes/mariadb:/var/lib/mysql:rw
     ports:
@@ -18,7 +18,7 @@ services:
 
   php:
     container_name: php-mg
-    restart: on-failure
+    restart: always
     build:
       context: ./docker/php
       args:
@@ -38,7 +38,7 @@ services:
 
   nginx:
     container_name: nginx-mg
-    restart: on-failure
+    restart: always
     build:
       context: ./docker/nginx
     volumes:
@@ -59,17 +59,12 @@ services:
     container_name: phpmyadmin-mg
     image: phpmyadmin/phpmyadmin
     environment:
-      PMA_HOSTS: mariadb
-      PMA_VERBOSES: docker_localhost
-      PMA_PORTS: 3306,3306
+      PMA_HOST: mariadb
       PMA_USER: root
       PMA_PASSWORD: Pass@123
-      PMA_ARBITRARY: 1
-      MAX_EXECUTION_TIME: 3600
-      UPLOAD_LIMIT: 500M
     ports:
       - 8081:80
-    depends_on:
+    links:
       - mariadb
     networks:
       - MeisamGhanbari

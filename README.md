@@ -51,8 +51,13 @@ docker-compose down
 ```
 
 **Prepare the project to run**
+First Step
 ```shell
 docker-compose exec php composer require
+```
+Second Step
+```shell
+docker-compose exec php ./artisan migrate 
 ```
 
 # HTTP Routes
