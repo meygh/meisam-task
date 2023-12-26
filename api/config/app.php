@@ -16,7 +16,16 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Sibche API Test task - Meisam Ghanbari'),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Latest API Version
+     |--------------------------------------------------------------------------
+     |
+     | The latest api version number that is related to a controller directory.
+     */
+    'api_latest_version' => '1',
 
     /*
     |--------------------------------------------------------------------------

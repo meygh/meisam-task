@@ -62,10 +62,10 @@ docker-compose exec php composer require
 
 ## API endpoints
 
-- **[Add Flights](http://localhost/api/v1/add-flights)**
+- **Add Flights**
   - http://localhost/api/v1/add-flights
 
-- **[Get Flights History](http://localhost/api/v1/add-flights)**
+- **Get Flights History**
   - http://localhost/api/v1/add-flights
 
 ## License
