@@ -68,11 +68,17 @@ docker-compose exec php ./artisan migrate --seed
 
 ## API endpoints
 
-- **Add Flights**
-  - http://localhost/api/v1/add-flights
+- **Get the first departure and the latest destination**
+  - [GET] http://localhost/api/v1/flights/{user_id}
 
-- **Get Flights History**
-  - http://localhost/api/v1/add-flights
+
+- **Get All Flights History**
+  - [GET] http://localhost/api/v1/flights/{user_id}/all
+
+
+- **Add Flights for the given user_id**
+  - [POST] http://localhost/api/v1/flights/{user_id}
+
 
 ## License
 
