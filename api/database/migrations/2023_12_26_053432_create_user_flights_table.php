@@ -22,8 +22,6 @@ return new class extends Migration
 
             $table->string('departure_airport', 4);
             $table->string('destination_airport', 4);
-
-            $table->timestamps();
         });
     }
 

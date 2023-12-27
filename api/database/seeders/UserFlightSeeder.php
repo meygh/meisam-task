@@ -13,7 +13,7 @@ class UserFlightSeeder extends Seeder
      */
     public function run(): void
     {
-        // Creates 1 to 7 flight history for a random user
-        UserFlight::factory(random_int(1, 7))->create();
+        // Adds 10 flights for a random user
+        UserFlight::factory(10)->create();
     }
 }
