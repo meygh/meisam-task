@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id'); // Equals passport number
-            $table->foreign('user_id')
+
+            // TODO: should be a relation between then user_id and users table, then uncomment this part.
+            /*$table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->cascadeOnDelete();
+                ->cascadeOnDelete();*/
 
             $table->string('departure_airport', 4);
             $table->string('destination_airport', 4);
